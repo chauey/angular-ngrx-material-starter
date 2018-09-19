@@ -25,6 +25,9 @@ import { FormComponent } from './form/components/form.component';
 import { FormEffects } from './form/form.effects';
 import { AuthenticatedComponent } from './authenticated/authenticated.component';
 
+import { RestaurantsEffects } from './restaurants/restaurants.effects';
+import { RestaurantContainerComponent } from './restaurants/container/container.component';
+
 @NgModule({
   imports: [
     SharedModule,
@@ -42,7 +45,8 @@ import { AuthenticatedComponent } from './authenticated/authenticated.component'
       TodosEffects,
       StockMarketEffects,
       BooksEffects,
-      FormEffects
+      FormEffects,
+      RestaurantsEffects
     ])
   ],
   declarations: [
@@ -53,7 +57,8 @@ import { AuthenticatedComponent } from './authenticated/authenticated.component'
     ChildComponent,
     AuthenticatedComponent,
     CrudComponent,
-    FormComponent
+    FormComponent,
+    RestaurantContainerComponent
   ],
   providers: [StockMarketService]
 })

@@ -3,7 +3,8 @@ import { SettingsActions, SettingsActionTypes } from './settings.actions';
 
 export const initialState: SettingsState = {
   language: 'en',
-  theme: 'DEFAULT-THEME',
+  // theme: 'DEFAULT-THEME',
+  theme: 'LUNCH-TYME-THEME',
   autoNightMode: false,
   stickyHeader: true,
   pageAnimations: true,

@@ -5,6 +5,7 @@
   "anms.examples.menu.crud": "CRUD",
   "anms.examples.menu.auth": "Auth",
   "anms.examples.menu.form": "Form",
+  "anms.examples.menu.restaurants": "Restaurants",
   "anms.examples.todos.input": "I am going to...",
   "anms.examples.todos.tooltip.add": "Add new todo",
   "anms.examples.todos.tooltip.remove": "Remove done todos",
@@ -84,7 +85,7 @@
   "anms.examples.crud.tooltip.deselect": "Deselect book",
   "anms.examples.auth.title": "Authenticated component",
   "anms.examples.auth.description1":
-    "This component is only accessible for authenticated users",
+  "This component is only accessible for authenticated users",
   "anms.examples.form.title": "Reactive form using a form builder",
   "anms.examples.form.subtitle1": "The form",
   "anms.examples.form.subtitle2": "Marketing information",

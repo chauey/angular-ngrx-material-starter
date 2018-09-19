@@ -1,0 +1,31 @@
+h1 {
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+}
+
+mat-card {
+  margin: 0 0 10px 0;
+  cursor: pointer;
+}
+
+.mat-fab {
+  .mat-icon {
+    position: relative;
+    top: 4px;
+  }
+}
+
+.add {
+  margin: 20px auto 0;
+  display: block;
+}
+
+.restaurant-card {
+  margin: 0 0 0 0;
+  cursor: pointer;
+  height: 180px;
+  background-image: url('/assets/Cuts/cellGradientBackground@2x.png');
+  h3 {
+    color: #FFFFFF;
+  }
+}

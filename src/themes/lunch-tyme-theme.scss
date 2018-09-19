@@ -1,0 +1,14 @@
+@import 'md-lunchTyme-palette.scss';
+@import 'md-lunchTyme2-palette.scss';
+
+// $someGreen: #43E895;
+
+$anms-lunch-tyme-primary: mat-palette($md-lunchtyme, 700, 300, 900);
+$anms-lunch-tyme-accent: mat-palette($md-lunchtyme2, 300);
+$anms-lunch-tyme-warn: mat-palette($mat-red, 600);
+
+$anms-lunch-tyme-theme: mat-light-theme(
+  $anms-lunch-tyme-primary,
+  $anms-lunch-tyme-accent,
+  $anms-lunch-tyme-warn
+);

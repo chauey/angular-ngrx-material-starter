@@ -4,6 +4,7 @@
   "anms.examples.menu.theming": "Theming",
   "anms.examples.menu.crud": "CRUD",
   "anms.examples.menu.auth": "Authentification",
+  "anms.examples.menu.restaurants": "Restaurants",
   "anms.examples.todos.input": "Je vais...",
   "anms.examples.todos.tooltip.add": "Ajouter une nouvelle tâche",
   "anms.examples.todos.tooltip.remove": "Supprimer les tâches terminées",
