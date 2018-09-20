@@ -1,0 +1,23 @@
+<div *ngIf="restaurant">
+    <!-- opened -->
+    <!-- [fixedInViewport]="options.value.fixed" [fixedTopGap]="options.value.top"
+             [fixedBottomGap]="options.value.bottom" -->
+    <!-- <button (click)=deselect()>close</button> -->
+    <agm-map [latitude]="restaurant.location.lat" [longitude]="restaurant.location.lng">
+      <agm-marker [latitude]="restaurant.location.lat" [longitude]="restaurant.location.lng"></agm-marker>
+    </agm-map>
+    <br>
+    <!-- {{restaurant|json}} -->
+    {{restaurant.name}}<br>
+    {{restaurant.category}}<br>
+    <br>
+    {{restaurant.location?.address}}<br>
+    {{restaurant.location?.city}} {{restaurant.location?.state}},
+    {{restaurant.location?.postalCode}}<br>
+    {{restaurant.contact?.formattedPhone}}<br>
+    <br>
+    {{restaurant.contact?.twitter}}<br>
+
+
+    <!-- {{options.value.fixed ? 'Fixed' : 'Non-fixed'}} Sidenav -->
+  </div>

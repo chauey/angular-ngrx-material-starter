@@ -25,8 +25,11 @@ import { FormComponent } from './form/components/form.component';
 import { FormEffects } from './form/form.effects';
 import { AuthenticatedComponent } from './authenticated/authenticated.component';
 
+import { AgmCoreModule } from '@agm/core';
 import { RestaurantsEffects } from './restaurants/restaurants.effects';
 import { RestaurantContainerComponent } from './restaurants/container/container.component';
+import { RestaurantItemDetailComponent } from './restaurants/restaurant-item-detail/restaurant-item-detail.component';
+import { BottomSheetOverviewExampleSheet } from '@app/examples/restaurants/container/bottom-sheet-overview-example-sheet';
 
 @NgModule({
   imports: [
@@ -47,7 +50,10 @@ import { RestaurantContainerComponent } from './restaurants/container/container.
       BooksEffects,
       FormEffects,
       RestaurantsEffects
-    ])
+    ]),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB3N-8o3EeRQX6k_ShM6E01VuKCPE6TH9s'
+    })
   ],
   declarations: [
     ExamplesComponent,
@@ -58,9 +64,12 @@ import { RestaurantContainerComponent } from './restaurants/container/container.
     AuthenticatedComponent,
     CrudComponent,
     FormComponent,
-    RestaurantContainerComponent
+    RestaurantContainerComponent,
+    RestaurantItemDetailComponent,
+    BottomSheetOverviewExampleSheet
   ],
-  providers: [StockMarketService]
+  providers: [StockMarketService],
+  entryComponents: [BottomSheetOverviewExampleSheet]
 })
 export class ExamplesModule {
   constructor() {}

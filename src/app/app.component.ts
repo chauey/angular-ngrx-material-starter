@@ -26,6 +26,7 @@ import {
   ActionSettingsChangeLanguage,
   ActionSettingsChangeAnimationsPageDisabled
 } from './settings';
+import { ActionRestaurantsSelect } from '@app/examples/restaurants/restaurants.actions';
 
 @Component({
   selector: 'anms-root',
@@ -81,6 +82,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscribeToSettings();
     this.subscribeToIsAuthenticated();
     this.subscribeToRouterEvents();
+  }
+
+  back() {
+    this.store.dispatch(new ActionRestaurantsSelect({ id: null }));
   }
 
   ngOnDestroy(): void {

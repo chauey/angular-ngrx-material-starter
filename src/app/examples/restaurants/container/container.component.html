@@ -1,96 +1,123 @@
-<div class="container">
-  <!-- <h1>{{ 'anms.examples.restaurants.title' | translate }}</h1> -->
-  <div class="row">
-    <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let restaurant of restaurants$ | async"
-    [ngClass]="routeAnimationsElements">
-      <!-- <h2>{{ 'anms.examples.restaurants.subtitle1' | translate }}</h2> -->
-      <mat-card class="restaurant-card" (click)="select(restaurant.id)" [style.background-image]="'url(' + restaurant.backgroundImageURL + ')'">
-        <h3>{{restaurant.name}}</h3>
-        <!-- <small>{{restaurant.author}}</small> -->
-      </mat-card>
-      <!-- <p *ngIf="(restaurants$ | async)?.length === 0">{{'anms.examples.restaurants.empty' | translate}}</p>
-      <button type="button" mat-fab color="primary"
-              class="add" [ngClass]="routeAnimationsElements"
-              *ngIf="!isEditing" (click)="addNew(restaurantForm)">
-        <mat-icon fontSet="fas" fontIcon="fa-plus"></mat-icon>
-      </button> -->
-    </div>
-    <div class="col-md-6">
-      <!-- <span class="d-flex justify-content-between">
-        <h2>{{ 'anms.examples.restaurants.subtitle2' | translate }}</h2>
-        <span class="d-flex justify-content-end">
-          <span *ngIf="selectedRestaurant">
-            <button mat-icon-button color="accent" *ngIf="!isEditing">
-              <mat-icon fontSet="fas" fontIcon="fa-edit" (click)="edit()"
-                        [matTooltip]="'anms.examples.restaurants.tooltip.edit' | translate"
-                        matTooltipPosition="above">
-              </mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="delete()">
-              <mat-icon fontSet="fas" fontIcon="fa-trash"
-                        [matTooltip]="'anms.examples.restaurants.tooltip.delete' | translate"
-                        matTooltipPosition="above">
-              </mat-icon>
-            </button>
-            <button mat-icon-button (click)="deselect()">
-              <mat-icon fontSet="fas" fontIcon="fa-times"
-                        [matTooltip]="'anms.examples.restaurants.tooltip.deselect' | translate"
-                        matTooltipPosition="above">
-              </mat-icon>
-            </button>
-          </span>
-        </span>
-      </span> -->
+<mat-drawer-container class="example-container">
+  <mat-drawer #sidenav mode="side" class="example-sidenav">
+    <anms-restaurant-item-detail [restaurant]='selectedRestaurant'></anms-restaurant-item-detail>
+  </mat-drawer>
 
-      <!-- <form #restaurantForm="ngForm" [formGroup]="restaurantFormGroup" [style.display]="isEditing ? 'block' : 'none'" [ngClass]="routeAnimationsElements">
-        <div class="row">
-          <mat-form-field class="col">
-            <input matInput placeholder="{{ 'anms.examples.restaurants.placeholder1' | translate }}" formControlName="name"
-              required autofocus>
-            <mat-error *ngIf="restaurantFormGroup.get('title').invalid">{{ 'anms.examples.restaurants.placeholder1' | translate }}
-              {{ 'anms.examples.restaurants.error' | translate }}</mat-error>
-          </mat-form-field>
+  <mat-drawer-content [formGroup]="options">
+
+    <div class="container">
+      <!-- <h1>{{ 'anms.examples.restaurants.title' | translate }}</h1> -->
+      <div class="row">
+        <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let restaurant of restaurants$ | async" [ngClass]="routeAnimationsElements">
+          <!-- <h2>{{ 'anms.examples.restaurants.subtitle1' | translate }}</h2> -->
+          <mat-card class="restaurant-card" (click)="select(restaurant.id)" [style.background-image]="'url(' + restaurant?.backgroundImageURL + ')'">
+            <h3>{{restaurant?.name}}</h3>
+            <h4>{{restaurant?.category}}</h4>
+            <!-- <small>{{restaurant.author}}</small> -->
+          </mat-card>
+          <!-- <p *ngIf="(restaurants$ | async)?.length === 0">{{'anms.examples.restaurants.empty' | translate}}</p>
+          <button type="button" mat-fab color="primary"
+                  class="add" [ngClass]="routeAnimationsElements"
+                  *ngIf="!isEditing" (click)="addNew(restaurantForm)">
+            <mat-icon fontSet="fas" fontIcon="fa-plus"></mat-icon>
+          </button> -->
         </div>
-        <div class="row">
-          <mat-form-field class="col">
-            <input matInput placeholder="{{ 'anms.examples.restaurants.placeholder2' | translate }}" formControlName="author"
-              required>
-            <mat-error *ngIf="restaurantFormGroup.get('author').hasError('required')">{{ 'anms.examples.restaurants.placeholder2' | translate }}
-              {{ 'anms.examples.restaurants.error' | translate }}</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field class="col">
-            <textarea matInput placeholder="{{ 'anms.examples.restaurants.placeholder3' | translate }}" formControlName="description"
-              rows="5"></textarea>
-            <mat-error *ngIf="restaurantFormGroup.get('description').invalid">{{ 'anms.examples.restaurants.placeholder1' |
-              translate }}
-              {{ 'anms.examples.restaurants.error' | translate }}</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <div class="col-12 d-flex justify-content-between">
-            <button (click)="save()" mat-raised-button color="primary">
-              {{'anms.examples.restaurants.save' | translate }}
-            </button>
-            <button (click)="cancelEditing()" mat-raised-button>
-              {{'anms.examples.restaurants.cancel' | translate }}
-            </button>
+        <div class="col-md-6">
+          <!-- <span class="d-flex justify-content-between">
+            <h2>{{ 'anms.examples.restaurants.subtitle2' | translate }}</h2>
+            <span class="d-flex justify-content-end">
+              <span *ngIf="selectedRestaurant">
+                <button mat-icon-button color="accent" *ngIf="!isEditing">
+                  <mat-icon fontSet="fas" fontIcon="fa-edit" (click)="edit()"
+                            [matTooltip]="'anms.examples.restaurants.tooltip.edit' | translate"
+                            matTooltipPosition="above">
+                  </mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="delete()">
+                  <mat-icon fontSet="fas" fontIcon="fa-trash"
+                            [matTooltip]="'anms.examples.restaurants.tooltip.delete' | translate"
+                            matTooltipPosition="above">
+                  </mat-icon>
+                </button>
+                <button mat-icon-button (click)="deselect()">
+                  <mat-icon fontSet="fas" fontIcon="fa-times"
+                            [matTooltip]="'anms.examples.restaurants.tooltip.deselect' | translate"
+                            matTooltipPosition="above">
+                  </mat-icon>
+                </button>
+              </span>
+            </span>
+          </span> -->
+
+          <!-- <form #restaurantForm="ngForm" [formGroup]="restaurantFormGroup" [style.display]="isEditing ? 'block' : 'none'" [ngClass]="routeAnimationsElements">
+            <div class="row">
+              <mat-form-field class="col">
+                <input matInput placeholder="{{ 'anms.examples.restaurants.placeholder1' | translate }}" formControlName="name"
+                  required autofocus>
+                <mat-error *ngIf="restaurantFormGroup.get('title').invalid">{{ 'anms.examples.restaurants.placeholder1' | translate }}
+                  {{ 'anms.examples.restaurants.error' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col">
+                <input matInput placeholder="{{ 'anms.examples.restaurants.placeholder2' | translate }}" formControlName="author"
+                  required>
+                <mat-error *ngIf="restaurantFormGroup.get('author').hasError('required')">{{ 'anms.examples.restaurants.placeholder2' | translate }}
+                  {{ 'anms.examples.restaurants.error' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="col">
+                <textarea matInput placeholder="{{ 'anms.examples.restaurants.placeholder3' | translate }}" formControlName="description"
+                  rows="5"></textarea>
+                <mat-error *ngIf="restaurantFormGroup.get('description').invalid">{{ 'anms.examples.restaurants.placeholder1' |
+                  translate }}
+                  {{ 'anms.examples.restaurants.error' | translate }}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex justify-content-between">
+                <button (click)="save()" mat-raised-button color="primary">
+                  {{'anms.examples.restaurants.save' | translate }}
+                </button>
+                <button (click)="cancelEditing()" mat-raised-button>
+                  {{'anms.examples.restaurants.cancel' | translate }}
+                </button>
+              </div>
+            </div>
+          </form> -->
+
+          <!-- <div [ngClass]="routeAnimationsElements" *ngIf="!isEditing && selectedRestaurant">
+            <h3>{{ selectedRestaurant.name }}</h3>
+            <mat-divider></mat-divider>
+            <p>{{ selectedRestaurant.description }}</p>
+            <i>{{ selectedRestaurant.author }}</i>
           </div>
+    
+          <p *ngIf="!isEditing && !selectedRestaurant" [ngClass]="routeAnimationsElements" >
+            {{'anms.examples.restaurants.text' | translate }} <code>@ngrx/entity</code>.
+          </p> -->
+
         </div>
-      </form> -->
-
-      <!-- <div [ngClass]="routeAnimationsElements" *ngIf="!isEditing && selectedRestaurant">
-        <h3>{{ selectedRestaurant.name }}</h3>
-        <mat-divider></mat-divider>
-        <p>{{ selectedRestaurant.description }}</p>
-        <i>{{ selectedRestaurant.author }}</i>
       </div>
-
-      <p *ngIf="!isEditing && !selectedRestaurant" [ngClass]="routeAnimationsElements" >
-        {{'anms.examples.restaurants.text' | translate }} <code>@ngrx/entity</code>.
-      </p> -->
-
     </div>
-  </div>
-</div>
+    <!-- 
+
+      <p>
+        <mat-checkbox formControlName="fixed">Fixed</mat-checkbox>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput type="number" formControlName="top" placeholder="Top gap">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput type="number" formControlName="bottom" placeholder="Bottom gap">
+        </mat-form-field>
+      </p>
+      <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p> -->
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<!-- <button mat-raised-button (click)="openBottomSheet()">Open file</button> -->
