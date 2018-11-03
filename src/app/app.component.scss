@@ -14,13 +14,15 @@ mat-sidenav-container {
       margin: 0 10px 0 0;
     }
 
-    mat-icon {
+    fa-icon {
       font-size: 24px;
     }
 
     .branding {
       cursor: pointer;
+      overflow: hidden;
       padding-top: 4px;
+      text-overflow: ellipsis;
 
       &.center {
         text-align: center;
@@ -34,8 +36,7 @@ mat-sidenav-container {
       }
     }
 
-    .sign-in-button {
-      line-height: 35px;
+    .mat-stroked-button {
       margin-right: 10px;
     }
 
@@ -54,11 +55,6 @@ mat-sidenav-container {
         min-width: 0;
         padding: 0 10px;
       }
-      .sign-in-button {
-        min-width: 0;
-        padding: 0 10px;
-        margin: 0 5px 0 0;
-      }
     }
   }
 
@@ -74,8 +70,7 @@ mat-sidenav-container {
     .content {
       flex: 1 0 auto;
       margin-top: 64px;
-      overflow-y: auto;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     .footer {
@@ -96,7 +91,7 @@ mat-sidenav-container {
               text-decoration: none;
             }
 
-            mat-icon {
+            fa-icon {
               font-size: 30px;
               width: 35px;
             }

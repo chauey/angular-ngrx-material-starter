@@ -7,18 +7,41 @@ import {
   ActionRestaurantsSelect
 } from './restaurants.actions';
 
+const restaurant1 = {
+  id: '1',
+  name: 'Hopdoddy Burger Bar',
+  backgroundImageURL:
+    'http://sandbox.bottlerocketapps.com/BR_iOS_CodingExam_2015_Server/Images/hopdoddy.png',
+  category: 'Burgers',
+  contact: {
+    phone: '9723872337',
+    formattedPhone: '(972) 387-2337',
+    twitter: 'hopdoddy'
+  },
+  location: {
+    address: '5100 Belt Line Road, STE 502',
+    crossStreet: 'Dallas North Tollway',
+    lat: 32.950787,
+    lng: -96.821118,
+    postalCode: '75254',
+    cc: 'US',
+    city: 'Addison',
+    state: 'TX',
+    country: 'United States',
+    formattedAddress: [
+      '5100 Belt Line Road, STE 502 (Dallas North Tollway)',
+      'Addison, TX 75254',
+      'United States'
+    ]
+  }
+};
+
 describe('RestaurantReducer', () => {
   const TEST_INITIAL_STATE: RestaurantState = {
     selectedRestaurantId: null,
-    ids: ['123'],
+    ids: ['1'],
     entities: {
-      '123': {
-        id: '123',
-        title: 'Reactive Programming with Angular and ngrx',
-        author: 'Oren Farhi',
-        description:
-          'Learn to Harness the Power of Reactive Programming with RxJS and ngrx Extensions'
-      }
+      '1': restaurant1
     }
   };
 
@@ -32,16 +55,15 @@ describe('RestaurantReducer', () => {
   it('should add a restaurant', () => {
     const action = new ActionRestaurantsAddOne({
       restaurant: {
-        id: '1234',
-        title: 'test',
-        author: 'test',
-        description: 'test'
+        ...restaurant1,
+        id: '2',
+        name: 'test'
       }
     });
     const state = restaurantReducer(TEST_INITIAL_STATE, action);
 
     expect(state.ids.length).toEqual(2);
-    expect(state.entities['1234'].title).toEqual('test');
+    expect(state.entities['2'].name).toEqual('test');
   });
 
   it('should update a restaurant', () => {
@@ -50,9 +72,7 @@ describe('RestaurantReducer', () => {
       update: {
         id,
         changes: {
-          title: 'updated',
-          author: 'updated',
-          description: 'updated'
+          name: 'updated'
         }
       }
     });
@@ -60,9 +80,7 @@ describe('RestaurantReducer', () => {
     const state = restaurantReducer(TEST_INITIAL_STATE, action);
     expect(state.entities[id]).toEqual(
       jasmine.objectContaining({
-        title: 'updated',
-        author: 'updated',
-        description: 'updated'
+        name: 'updated'
       })
     );
   });

@@ -17,6 +17,7 @@ import { selectTodos } from '../todos.selectors';
 import { Todo, TodosFilter, TodosState } from '../todos.model';
 import { State } from '../../examples.state';
 import { TranslateService } from '@ngx-translate/core';
+import { NotificationService } from '@app/core/notifications/notification.service';
 
 @Component({
   selector: 'anms-todos',
@@ -33,12 +34,16 @@ export class TodosContainerComponent implements OnInit, OnDestroy {
   constructor(
     public store: Store<State>,
     public snackBar: MatSnackBar,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
     this.store
-      .pipe(select(selectTodos), takeUntil(this.unsubscribe$))
+      .pipe(
+        select(selectTodos),
+        takeUntil(this.unsubscribe$)
+      )
       .subscribe(todos => {
         this.todos = todos;
         this.store.dispatch(new ActionTodosPersist({ todos }));
@@ -82,7 +87,7 @@ export class TodosContainerComponent implements OnInit, OnDestroy {
       'anms.examples.todos.added.notification',
       { name: this.newTodo }
     );
-    this.showNotification(addedMessage);
+    this.notificationService.info(addedMessage);
     this.newTodo = '';
   }
 
@@ -96,7 +101,12 @@ export class TodosContainerComponent implements OnInit, OnDestroy {
       'anms.examples.todos.toggle.notification',
       { name: todo.name }
     );
-    this.showNotification(`${toggledMessage} ${newStatus}`, undo)
+
+    this.snackBar
+      .open(`${toggledMessage} ${newStatus}`, undo, {
+        duration: 2500,
+        panelClass: 'todos-notification-overlay'
+      })
       .onAction()
       .subscribe(() => this.onToggleTodo({ ...todo, done: !todo.done }));
   }
@@ -106,7 +116,7 @@ export class TodosContainerComponent implements OnInit, OnDestroy {
     const removedMessage = this.translateService.instant(
       'anms.examples.todos.remove.notification'
     );
-    this.showNotification(removedMessage);
+    this.notificationService.info(removedMessage);
   }
 
   onFilterTodos(filter: TodosFilter) {
@@ -117,13 +127,6 @@ export class TodosContainerComponent implements OnInit, OnDestroy {
     const filterMessage = this.translateService.instant(
       `anms.examples.todos.filter.${filter.toLowerCase()}`
     );
-    this.showNotification(`${filterToMessage} ${filterMessage}`);
-  }
-
-  private showNotification(message: string, action?: string) {
-    return this.snackBar.open(message, action, {
-      duration: 2500,
-      panelClass: 'todos-notification-overlay'
-    });
+    this.notificationService.info(`${filterToMessage} ${filterMessage}`);
   }
 }

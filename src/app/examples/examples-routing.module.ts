@@ -11,6 +11,7 @@ import { StockMarketContainerComponent } from './stock-market/components/stock-m
 import { CrudComponent } from './crud/components/crud.component';
 import { FormComponent } from './form/components/form.component';
 import { RestaurantContainerComponent } from './restaurants/container/container.component';
+import { NotificationsComponent } from './notifications/components/notifications.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,11 @@ const routes: Routes = [
         data: { title: 'anms.examples.menu.crud' }
       },
       {
+        path: 'crud/:id',
+        component: CrudComponent,
+        data: { title: 'anms.examples.menu.crud' }
+      },
+      {
         path: 'form',
         component: FormComponent,
         data: { title: 'anms.examples.menu.form' }
@@ -51,6 +57,11 @@ const routes: Routes = [
         path: 'restaurants',
         component: RestaurantContainerComponent,
         data: { title: 'anms.examples.menu.restaurants' }
+      },
+      {
+        path: 'notifications',
+        component: NotificationsComponent,
+        data: { title: 'anms.examples.menu.notifications' }
       },
       {
         path: 'authenticated',

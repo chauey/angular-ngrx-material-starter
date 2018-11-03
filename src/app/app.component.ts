@@ -14,7 +14,8 @@ import {
   TitleService,
   selectAuth,
   routeAnimations,
-  AppState
+  AppState,
+  LocalStorageService
 } from '@app/core';
 import { environment as env } from '@env/environment';
 
@@ -37,7 +38,8 @@ import { ActionRestaurantsSelect } from '@app/examples/restaurants/restaurants.a
 export class AppComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
 
-  @HostBinding('class') componentCssClass;
+  @HostBinding('class')
+  componentCssClass;
 
   isProd = env.production;
   envName = env.envName;
@@ -65,7 +67,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     private titleService: TitleService,
     private animationService: AnimationsService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private storageService: LocalStorageService
   ) {}
 
   private static trackPageView(event: NavigationEnd) {
@@ -82,6 +85,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscribeToSettings();
     this.subscribeToIsAuthenticated();
     this.subscribeToRouterEvents();
+    this.storageService.testLocalStorage();
   }
 
   back() {
@@ -108,7 +112,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private subscribeToIsAuthenticated() {
     this.store
-      .pipe(select(selectAuth), takeUntil(this.unsubscribe$))
+      .pipe(
+        select(selectAuth),
+        takeUntil(this.unsubscribe$)
+      )
       .subscribe(auth => (this.isAuthenticated = auth.isAuthenticated));
   }
 
@@ -121,7 +128,10 @@ export class AppComponent implements OnInit, OnDestroy {
       );
     }
     this.store
-      .pipe(select(selectSettings), takeUntil(this.unsubscribe$))
+      .pipe(
+        select(selectSettings),
+        takeUntil(this.unsubscribe$)
+      )
       .subscribe(settings => {
         this.settings = settings;
         this.setTheme(settings);

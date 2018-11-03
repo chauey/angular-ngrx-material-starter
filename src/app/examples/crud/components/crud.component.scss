@@ -9,7 +9,7 @@ mat-card {
 }
 
 .mat-fab {
-  .mat-icon {
+  .fa-icon {
     position: relative;
     top: 4px;
   }
@@ -18,4 +18,8 @@ mat-card {
 .add {
   margin: 20px auto 0;
   display: block;
+}
+
+.col-md-6 {
+  margin-bottom: 20px;
 }

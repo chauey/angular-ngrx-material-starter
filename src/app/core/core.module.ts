@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
@@ -15,6 +15,14 @@ import { AuthGuardService } from './auth/auth-guard.service';
 import { AnimationsService } from './animations/animations.service';
 import { TitleService } from './title/title.service';
 import { reducers, metaReducers } from './core.state';
+import { AppErrorHandler } from './error-handler/app-error-handler.service';
+import { httpInterceptorProviders } from '@app/core/http-interceptors';
+import {
+  StoreRouterConnectingModule,
+  RouterStateSerializer
+} from '@ngrx/router-store';
+import { CustomSerializer } from './router/custom-serializer';
+import { NotificationService } from './notifications/notification.service';
 
 @NgModule({
   imports: [
@@ -24,6 +32,7 @@ import { reducers, metaReducers } from './core.state';
 
     // ngrx
     StoreModule.forRoot(reducers, { metaReducers }),
+    StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([AuthEffects]),
     environment.production
       ? []
@@ -42,10 +51,14 @@ import { reducers, metaReducers } from './core.state';
   ],
   declarations: [],
   providers: [
+    NotificationService,
     LocalStorageService,
     AuthGuardService,
     AnimationsService,
-    TitleService
+    httpInterceptorProviders,
+    TitleService,
+    { provide: ErrorHandler, useClass: AppErrorHandler },
+    { provide: RouterStateSerializer, useClass: CustomSerializer }
   ],
   exports: [TranslateModule]
 })

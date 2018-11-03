@@ -36,32 +36,28 @@ describe('StockMarketContainerComponent', () => {
     fixture.debugElement.query(By.css('mat-card mat-card-subtitle'));
 
   const getCaretUpDownItem = () =>
-    fixture.debugElement.query(
-      By.css('mat-card mat-icon[fontIcon="fa-caret-down"]')
-    );
+    fixture.debugElement.query(By.css('mat-card fa-icon[icon="caret-down"]'));
 
   describe('given component booted', () => {
-    beforeEach(
-      async(() => {
-        TestBed.configureTestingModule({
-          imports: [CoreModule, TestingModule],
-          providers: [StockMarketService],
-          declarations: [StockMarketContainerComponent]
-        }).compileComponents();
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        imports: [CoreModule, TestingModule],
+        providers: [StockMarketService],
+        declarations: [StockMarketContainerComponent]
+      }).compileComponents();
 
-        const stockMarketService = TestBed.get(StockMarketService);
-        retrieveStockSpy = spyOn(
-          stockMarketService,
-          'retrieveStock'
-        ).and.returnValue(EMPTY);
+      const stockMarketService = TestBed.get(StockMarketService);
+      retrieveStockSpy = spyOn(
+        stockMarketService,
+        'retrieveStock'
+      ).and.returnValue(EMPTY);
 
-        store = TestBed.get(Store);
-        store.setState(createState({ symbol: '', loading: true }));
-        fixture = TestBed.createComponent(StockMarketContainerComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-      })
-    );
+      store = TestBed.get(Store);
+      store.setState(createState({ symbol: '', loading: true }));
+      fixture = TestBed.createComponent(StockMarketContainerComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    }));
 
     it('should be created', () => {
       expect(component).toBeTruthy();

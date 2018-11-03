@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -24,6 +23,7 @@ import { BooksEffects } from './crud/books.effects';
 import { FormComponent } from './form/components/form.component';
 import { FormEffects } from './form/form.effects';
 import { AuthenticatedComponent } from './authenticated/authenticated.component';
+import { NotificationsComponent } from './notifications/components/notifications.component';
 
 import { AgmCoreModule } from '@agm/core';
 import { RestaurantsEffects } from './restaurants/restaurants.effects';
@@ -66,7 +66,8 @@ import { BottomSheetOverviewExampleSheet } from '@app/examples/restaurants/conta
     FormComponent,
     RestaurantContainerComponent,
     RestaurantItemDetailComponent,
-    BottomSheetOverviewExampleSheet
+    BottomSheetOverviewExampleSheet,
+    NotificationsComponent
   ],
   providers: [StockMarketService],
   entryComponents: [BottomSheetOverviewExampleSheet]

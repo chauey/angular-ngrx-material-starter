@@ -6,10 +6,16 @@ import { Observable, Subject } from 'rxjs';
 import { filter, takeUntil, map } from 'rxjs/operators';
 
 import { routeAnimations, TitleService } from '@app/core';
-import { selectSettings, SettingsState } from '@app/settings';
+import {
+  State as BaseSettingsState,
+  selectSettings,
+  SettingsState
+} from '@app/settings';
 
-import { State } from '../examples.state';
+import { State as BaseExamplesState } from '../examples.state';
 import { selectAuth } from '@app/core/auth/auth.selectors';
+
+interface State extends BaseSettingsState, BaseExamplesState {}
 
 @Component({
   selector: 'anms-examples',
@@ -26,6 +32,8 @@ export class ExamplesComponent implements OnInit, OnDestroy {
     { link: 'stock-market', label: 'anms.examples.menu.stocks' },
     { link: 'theming', label: 'anms.examples.menu.theming' },
     { link: 'crud', label: 'anms.examples.menu.crud' },
+    { link: 'form', label: 'anms.examples.menu.form' },
+    { link: 'notifications', label: 'anms.examples.menu.notifications' },
     { link: 'restaurants', label: 'anms.examples.menu.restaurants' },
     { link: 'authenticated', label: 'anms.examples.menu.auth', auth: true }
   ];
@@ -54,7 +62,10 @@ export class ExamplesComponent implements OnInit, OnDestroy {
 
   private subscribeToSettings() {
     this.store
-      .pipe(select(selectSettings), takeUntil(this.unsubscribe$))
+      .pipe(
+        select(selectSettings),
+        takeUntil(this.unsubscribe$)
+      )
       .subscribe((settings: SettingsState) =>
         this.translate.use(settings.language)
       );
